@@ -19,8 +19,6 @@ Route::get('/snap', function () {
     return view('snap');
 });
 
-Route::post('/snap/snapshot', 'SnapController@snapshot');
-
 Route::get('/compare', function () {
     return view('compare');
 });
@@ -44,14 +42,16 @@ Route::get('/settings', function () {
     return view('settings', ['config' => \Config::get('jsnap')]);
 });
 
-Route::post('/compare/presnaps', 'CompareController@presnaps');
+Route::match(['GET', 'POST'], '/snap/snapshot', 'SnapController@snapshot');
 
-Route::post('/compare/postsnaps', 'CompareController@postsnaps');
+Route::match(['GET', 'POST'], '/compare/presnaps', 'CompareController@presnaps');
 
-Route::post('/compare/compare', 'CompareController@compare');
+Route::match(['GET', 'POST'], '/compare/postsnaps', 'CompareController@postsnaps');
 
-Route::post('/check/check', 'CheckController@check');
+Route::match(['GET', 'POST'], '/compare/compare', 'CompareController@compare');
 
-Route::post('/manage/delete', 'ManageController@delete');
+Route::match(['GET', 'POST'], '/check/check', 'CheckController@check');
 
-Route::post('/settings/save', 'SettingsController@save');
+Route::match(['GET', 'POST'], '/manage/delete', 'ManageController@delete');
+
+Route::match(['GET', 'POST'], '/settings/save', 'SettingsController@save');

@@ -8,7 +8,6 @@
                 </div>
                 <div class="panel-body">
                     <form id="formPreSnaps">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <div class="form-group">
                             <label for="compareHostname">Hostname</label>
                             <input type="text" class="form-control" id="compareHostname" name="compareHostname" placeholder="Hostname">

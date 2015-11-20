@@ -8,7 +8,6 @@
                 </div>
                 <div class="panel-body">
                     <form id="formSnap">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <div class="form-group">
                             <label for="snapHostname">Hostname</label>
                             <input type="text" class="form-control" id="snapHostname" name="snapHostname" placeholder="Hostname">

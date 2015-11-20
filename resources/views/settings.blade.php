@@ -9,7 +9,6 @@
                 </div>
                 <div class="panel-body">
                     <form action="/settings/save" method="POST">
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
                         @foreach ($config as $configTypeName => $configType)
                             <h2>{{strtoupper($configTypeName)}}</h2>
                             @foreach($configType as $configName => $configValue)

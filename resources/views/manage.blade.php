@@ -34,7 +34,6 @@
                                     </td>
                                     <td class="text-center">
                                         <form>
-                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <input type="hidden" name="deleteHostname" value="{{$deviceName}}">
                                             <input type="hidden" name="deleteTime" value="{{$snapTime}}">
 
