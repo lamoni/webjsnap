@@ -4,3 +4,6 @@ Homestead.yaml
 Homestead.json
 .env
 /.idea
+/storage/jsnap/snapchecks
+/storage/jsnap/snapshots
+/storage/jsnap/swap

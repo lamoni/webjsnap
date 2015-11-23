@@ -49,12 +49,15 @@
             var $alertResult = $('#alertResult');
             var $btnRetrieve = $('#btnRetrieve');
             var $btnCompare  = $('#btnCompare');
+            var $divCompareResults = $('#divCompareResults');
 
             $btnRetrieve.click(function(e) {
                 e.preventDefault();
 
 
                 $alertResult.hide().html('');
+                $divCompareResults.html('');
+
                 $btnRetrieve.button('loading').prop('disabled', true);
 
                 $('#selectPreSnap').prop('disabled', true).find('option').remove();
@@ -123,9 +126,7 @@
 
             $btnCompare.click(function (e) {
                 e.preventDefault();
-
-                $divCompareResults = $('#divCompareResults');
-
+                $btnCompare.button('loading');
                 $divCompareResults.html('');
                 $.post("/compare/compare", $( "#formPreSnaps" ).serialize() , function (data) {
 
@@ -168,7 +169,7 @@
                         $alertResult.addClass('alert-danger').removeClass('alert-success').html(data.html).show();
 
                     }
-                    $btnRetrieve.button('reset');
+                    $btnCompare.button('reset');
                 }, 'json');
 
             });
