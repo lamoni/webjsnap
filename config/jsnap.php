@@ -1,3 +1,3 @@
 <?php
 
-return json_decode(file_get_contents('../storage/jsnap/config.json'), true);
+return json_decode(file_get_contents(storage_path('jsnap/config.json')), true);

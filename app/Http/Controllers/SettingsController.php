@@ -35,7 +35,7 @@ class SettingsController extends Controller
 
         }
 
-        file_put_contents('/var/www/storage/jsnap/config.json', json_encode($final));
+        file_put_contents(storage_path('jsnap/config.json'), json_encode($final));
 
         return redirect('/settings');
     }
