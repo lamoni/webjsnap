@@ -6,10 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    $vendorDir . '/symfony/var-dumper/Resources/functions/dump.php',
     $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
-    $vendorDir . '/nikic/php-parser/lib/bootstrap.php',
+    $vendorDir . '/symfony/var-dumper/Resources/functions/dump.php',
     $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
+    $vendorDir . '/symfony/polyfill-php56/bootstrap.php',
     $vendorDir . '/danielstjules/stringy/src/Create.php',
     $vendorDir . '/psy/psysh/src/Psy/functions.php',
     $vendorDir . '/paragonie/random_compat/lib/random.php',
