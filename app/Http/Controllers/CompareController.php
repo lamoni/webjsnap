@@ -47,9 +47,36 @@ class CompareController extends Controller
 
     public function compare(JSnapCommander $jsnap)
     {
-        if (\Request::has('compareHostname') && \Request::has('selectPreSnap') && \Request::has('selectPostSnap')) {
+        if (\Request::has('compareHostname')) {
 
-            $results = $jsnap->check(\Request::get('compareHostname'), \Request::get('selectPreSnap'), \Request::get('selectPostSnap'));
+	        if (\Request::has('selectPreSnap') && \Request::has('selectPostSnap')) {
+
+		        $selectPreSnap = \Request::get('selectPreSnap');
+
+		        $selectPostSnap = \Request::get('selectPostSnap');
+
+	        }
+	        else {
+		        // No snapshots specified, so assume the two latest snapshots are preferred
+		        $presnaps = $jsnap->loadSnapshotList(\Request::get('compareHostname'));
+
+		        if (count($presnaps) < 2) {
+
+			        return ['error' => 1, 'html' => 'Must be at least two snapshots to do a comparison'];
+
+		        }
+
+		        $keys = array_keys($presnaps);
+
+		        $selectPreSnap = $keys[0];
+
+		        $selectPostSnap = $keys[1];
+	        }
+
+            $results = $jsnap->check(\Request::get('compareHostname'), $selectPreSnap, $selectPostSnap);
+
+
+
 
             $final = [];
 
@@ -81,6 +108,22 @@ class CompareController extends Controller
 
             }
 
+	        if (\Request::has('format') && \Request::get('format') === 'raw') {
+		        $rawOutput = "All Tests Passed Successfully";
+
+		        if (isset($final['failedTests'])) {
+			        $rawOutput = "FAILED TESTS\n\n";
+			        foreach ($final['failedTests'] as $failedTestName => $names) {
+				        $rawOutput .= "{$failedTestName}\n";
+				        foreach ($names as $name=>$value) {
+					        $value = trim($value);
+					        $rawOutput .= "  {$name}\n    {$value}";
+				        }
+			        }
+		        }
+
+		        return $rawOutput;
+	        }
             return ['error' => 0, 'result' => $final];
 
         }
