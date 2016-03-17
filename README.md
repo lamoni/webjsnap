@@ -40,7 +40,7 @@ import "../import/junos.xsl";
 
 match / {
     <op-script-results> {
-		var $url = "http://192.168.229.135/snap/snapshot?snapHostname="_$hostname;
+		var $url = "http://192.168.0.11/snap/snapshot?snapHostname="_$hostname;
 		var $get = <file-copy> {
 			<source> $url;
 			<destination> "/dev/null";
