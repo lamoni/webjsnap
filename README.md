@@ -50,3 +50,37 @@ match / {
     }
 }
 ```
+
+
+# SLAX Op Script for triggering comparison from a router
+```
+version 1.0;
+
+ns junos = "http://xml.juniper.net/junos/*/junos";
+ns xnm = "http://xml.juniper.net/xnm/1.1/xnm";
+ns jcs = "http://xml.juniper.net/junos/commit-scripts/1.0";
+import "../import/junos.xsl";
+
+match / {
+    <op-script-results> {
+        var $url = "http://192.168.0.11/compare/compare?format=raw&compareHostname="_$hostname;
+        var $get = <file-copy> {
+            <source> $url;
+            <destination> "/var/tmp/snapshotcomparison.txt";
+        }
+
+        var $rsp = jcs:invoke($get);
+		
+		var $fileget = {
+			<file-get> {
+				<filename> "/var/tmp/snapshotcomparison.txt";
+				<encoding> "ascii";
+			}
+		}
+		
+		var $output = jcs:invoke($fileget);
+		
+		<output> $output;
+    }
+}
+```
